@@ -1,0 +1,16 @@
+
+
+iddat
+
+load iddata1 z1;                % iddata1 is time domain input/output data in what format?
+np = 5;                         % nubmer of poles
+sys = tfest(z1,np);             % the estimated transfer function
+
+%{
+
+enter these in cmd line to see results
+
+sys.Numerator;                  
+sys.Denominator;
+
+%}
