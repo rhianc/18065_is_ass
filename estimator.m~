@@ -1,10 +1,26 @@
+% turn into a function, take as inputs x and y (in
 
 
-iddat
+% get dataset length: 
+length = size(y);
 
-load iddata1 z1;                % iddata1 is time domain input/output data in what format?
-np = 5;                         % nubmer of poles
-sys = tfest(z1,np);             % the estimated transfer function
+iddata1 = iddata(y,x,1);        % y is output data, x is input data, 1 is 
+                                % sample period (discrete)
+                                
+                                % y and x are both column vectors of equal
+                                % length
+
+load iddata1 z1;                % iddata1 is time domain input/output data
+
+training_data = z1(1:floor(4*length/5));
+validation_data = z1(floor(4*length/5)+1,length);
+
+% try different order transfer functions and select minimal error system
+
+for np = 1:10        
+    sys = tfest(training_data,np);         % estimate system with np poles 
+    
+end
 
 %{
 
