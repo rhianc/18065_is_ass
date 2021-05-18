@@ -13,9 +13,9 @@ y_data = import_data(country,1);
 x_data = import_data(country,0);
 
 
-y_data(isnan(y_data))=1;
+y_data(isnan(y_data))=0;
 
-x_data(isnan(x_data))=1;
+x_data(isnan(x_data))=0;
 
 z1 = iddata(y_data,x_data); 
 

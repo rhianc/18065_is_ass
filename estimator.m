@@ -13,7 +13,7 @@ function best_sys = estimator(z1)
     % try different order transfer functions and select minimal error system
     best_fit = -100;
     best_sys = tf();
-    for np = 1:15        
+    for np = 2:10        
         sys = tfest(z1,np);                                      % estimate system with np poles 
         [y,fit,ic] = compare(z1,sys);
         disp(fit);
