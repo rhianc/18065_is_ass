@@ -1,5 +1,6 @@
 
 % take as inputs x and y (input & output vectors) and returns the estimated transfer function. 
+% estimator for single input single output system
 
 function best_sys = estimator(x,y)
 
