@@ -11,7 +11,8 @@
 
 x = [];
 y = [];
-country = "USA";
+country = 'United States';
+
 
 data = import_data(country);
 
