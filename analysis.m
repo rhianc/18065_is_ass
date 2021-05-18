@@ -13,8 +13,10 @@ x = [];
 y = [];
 country = "USA";
 
-sys_estimate = estimator(x,y);
-step_response = step(sys_estimate);
+data = import_data(country);
+
+%sys_estimate = estimator(x,y);
+%step_response = step(sys_estimate);
 
 % I actually think it won't work that great unless we use an initial
 % condition (like daily confirmed cases, and let the system see those
