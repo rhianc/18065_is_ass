@@ -1,45 +1,51 @@
 
 % Use this file to analyse the estimated LTI system results
 
-% use estimator on various countries
+% use estimator on various countries, some countries it doesn't look that
+% good, others it's awesome. 
+
+% it looks better without saving some data for validation, of course. When
+% I train on the last 80% of time and then validate on the first 20% it
+% works reasonably well, but that also isn't validating the vaccine part. 
 
 % compare impulse/step responses, see if there are signficant differences
 % between countries and try and hypothesize why. 
 %%
-country = 'United States';
 
+%{
+Countries that look good:
+United States
+India
+Colombia
+Mexico
+Russia
+%}
+
+country = 'India';
+% pick a country
 
 y_data = import_data(country,1);
 x_data = import_data(country,0);
-
+% import input (x_data) and output (y_data) 
 
 y_data(isnan(y_data))=0;
-
 x_data(isnan(x_data))=0;
+% make all the NaN datatypes equal to 0
 
 z1 = iddata(y_data,x_data); 
+% make the correct data type for model prediction
 
 %%
 sys_estimate = estimator(z1);
-%step_response = step(sys_estimate);
+% save the estimated system
 
 compare(z1,sys_estimate);
+% compare the actual system output with out simulated system output 
+% overlays plots and shows a measure of "goodness" of fit
 
-%time_samples = 1:length(y_data);
-%time_samples = transpose(time_samples);
-%x_data(isnan(x_data))=0;
-%lsim(sys_estimate,x_data,time_samples);
+%% compare step response
+h = stepplot(sys_estimate);
+% plot step response, can't figure out how to plot the response to
+% different inputs on different axiis. 
 
-% I actually think it won't work that great unless we use an initial
-% condition (like daily confirmed cases, and let the system see those
-% internal dynamics, then adjust for the new inputs once vaccinations start
-% happening)
 
-% I think the share of positive tests dataset is gonna end up being useful
-% for sure, but there are external factors that cause the peaks to start
-% decreasing without vaccinations which we somehow need to take into
-% account. I'm not sure which data to use as an input to account for this. 
-
-% we can make this all more complex (adding other inputs to the system,
-% non-linearity, etc) but first lets make sure it works as expected with
-% simple inputs. 

@@ -5,26 +5,28 @@
 
 % compare impulse/step responses, see if there are signficant differences
 % between countries and try and hypothesize why. 
+%%
 
-country = 'United States';
+
+
+country = 'India';
 
 
 y_data = import_data(country,1);
 x_data = import_data(country,0);
 
-%y_data=misdata(y_data);
-%y_data(isnan(y_data))=0;
-%x_data=misdata(x_data);
-%x_data(isnan(x_data))=0;
+
+y_data(isnan(y_data))=0;
+x_data(isnan(x_data))=0;
 
 
-sys_estimate, data = estimator(x_data,y_data);
+z1 = iddata(y_data,x_data); 
+
+%%
+sys_estimate = estimator(z1);
 %step_response = step(sys_estimate);
 
-time_samples = 1:length(y_data);
-time_samples = transpose(time_samples);
-x_data(isnan(x_data))=0;
-lsim(sys_estimate,x_data,time_samples);
+compare(z1,sys_estimate);
 
 % I actually think it won't work that great unless we use an initial
 % condition (like daily confirmed cases, and let the system see those
