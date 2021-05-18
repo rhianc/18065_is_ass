@@ -21,7 +21,7 @@ Mexico
 Russia
 %}
 
-country = 'India';
+country = 'Russia';
 % pick a country
 
 y_data = import_data(country,1);
